@@ -43,5 +43,12 @@ def scoreboard():
 def winner():
     return render_template('winner.html')
 
+@app.route('/reset_scores', methods=['POST'])
+def reset_scores():
+    global scores
+    scores = {"R1": 0, "R2": 0}
+    return jsonify({"status": "reset", "scores": scores})
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
+    
