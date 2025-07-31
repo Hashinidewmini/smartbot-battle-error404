@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Smart Bot Battle</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
@@ -14,19 +14,19 @@
 
   <main>
     <div class="content-container">
-      <p>Welcome to Smart Bot Battle !</p>
+      <p class="intro-text">Welcome to the Ultimate Smart Bot Battle Arena!</p>
 
       <div class="how-to-play">
         <h2>How to Play</h2>
         <ul>
-          <li>⚔️ Try to push smart bot out of the ring.</li>
-          <li>⏱️ Matches are timed — act quickly and strategically.</li>
-          <li>🏆 You earn points by pushing the smart bot out of the<br>&nbsp; &nbsp; &nbsp; &nbsp;ring within the time limit.</li>
-          <li>🥇 The bot with the most points at the end wins!</li>
+          <li>⚔️ Push the smart bot out of the ring to score points.</li>
+          <li>⏱️ Matches are timed — act fast and think smart.</li>
+          <li>🏆 Earn points for every successful push within the time limit.</li>
+          <li>🥇 The bot with the highest score wins the battle!</li>
         </ul>
       </div>
 
-      <button id="start-game-btn">Start Game</button>
+      <button id="start-game-btn" class="btn-glow">Start Battle</button>
     </div>
   </main>
 
@@ -34,13 +34,17 @@
     <p>&copy; 2025 Smart Bot Battle. All rights reserved.</p>
   </footer>
 
-  <audio id="click-sound" src="/static/sounds/click.mp3"></audio>
+  <!-- Click Sound -->
+  <audio id="click-sound" src="{{ url_for('static', filename='sounds/click.mp3') }}"></audio>
 
   <script>
+    // Click sound + redirect
     document.getElementById("start-game-btn").addEventListener("click", function () {
       const clickSound = document.getElementById("click-sound");
       clickSound.play();
-      window.location.href = "/countdown";
+      setTimeout(() => {
+        window.location.href = "/countdown";
+      }, 200); // Delay to let sound play
     });
   </script>
 </body>

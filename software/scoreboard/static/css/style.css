@@ -1,130 +1,193 @@
 /* Reset */
-body, h1, p, button, ul, li, h2 {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* General */
-  body {
-    font-family: 'Orbitron', Arial, sans-serif;
-    background-color: #000000;
-    color: #00ffff;
-    text-align: center;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Header */
-  header {
-    background-color: transparent;
-    padding: 30px 0;
-  }
-  
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Orbitron', Arial, sans-serif;
+  background:
+    radial-gradient(circle at center, #000000, #070a0f 80%),
+    url('/static/images/robot.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #00ffff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  text-shadow: 0 0 6px #00ffffaa;
+}
+
+/* Header */
+header {
+  padding: 40px 0 30px 0;
+  background: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: #00ffff;
+  text-shadow:
+    0 0 10px #00ffff,
+    0 0 20px #00ffff,
+    0 0 30px #00ffff,
+    0 0 40px #0ff,
+    0 0 70px #0ff;
+  user-select: none;
+}
+
+header h1 {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+/* Main container */
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.content-container {
+  position: relative;
+  background-color: rgba(0, 15, 20, 0.85);
+  border-radius: 20px;
+  box-shadow:
+    0 0 20px #00ffff99,
+    0 0 40px #00ffff66 inset;
+  width: 90%;
+  max-width: 850px;
+  padding: 50px 40px;
+  color: #00ffff;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Overlay dark tint */
+.content-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,255,255,0.15), rgba(0,128,128,0.3));
+  pointer-events: none;
+  border-radius: 20px;
+  z-index: 0;
+}
+
+/* Bring text & buttons above overlay */
+.content-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Intro Text */
+.intro-text {
+  font-size: 1.9rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 12px #00ffffcc;
+}
+
+/* How to Play Section */
+.how-to-play {
+  text-align: left;
+  margin: 0 auto 45px auto;
+  max-width: 600px;
+  border-left: 3px solid #00ffff;
+  padding-left: 25px;
+}
+
+.how-to-play h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow:
+    0 0 6px #00ffff,
+    0 0 10px #00ffffbb;
+}
+
+.how-to-play ul {
+  list-style: none;
+}
+
+.how-to-play li {
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+  line-height: 1.5;
+  text-shadow: 0 0 8px #00ffffbb;
+}
+
+/* Glowing button style */
+.btn-glow {
+  font-size: 1.5rem;
+  padding: 18px 65px;
+  background: linear-gradient(45deg, #00ffff, #008080);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  color: #000;
+  font-weight: 700;
+  box-shadow:
+    0 0 15px #00ffff,
+    0 0 30px #00ffff,
+    0 0 40px #008080,
+    inset 0 0 10px #00ffff;
+  transition: all 0.3s ease;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.btn-glow:hover,
+.btn-glow:focus {
+  background: linear-gradient(45deg, #00ffffcc, #00cccc);
+  box-shadow:
+    0 0 25px #00ffff,
+    0 0 60px #00ffff,
+    0 0 80px #00ffff,
+    inset 0 0 20px #00ffff;
+  transform: scale(1.1);
+  outline: none;
+}
+
+/* Footer */
+footer {
+  background-color: #010f12;
+  color: #00ffffcc;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 1rem;
+  box-shadow: 0 -2px 15px #00ffff66;
+  text-shadow: 0 0 6px #00ffffcc;
+  user-select: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
   header h1 {
-    font-size: 3rem;
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    font-size: 2.5rem;
   }
-  
-  /* Content Container */
   .content-container {
-    background-color: #111;
-    color: #00ffff;
-    margin: auto;
-    padding: 50px;
-    width: 70%;
-    max-width: 900px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #00ffff88;
-    text-align: center;
-  
-    background-image: url('/static/images/robot.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  
-    position: relative;
-    overflow: hidden;
+    padding: 40px 25px;
   }
-  
-  .content-container::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
-    z-index: 0;
-  }
-  
-  .content-container p,
-  .content-container button,
-  .how-to-play {
-    position: relative;
-    z-index: 1;
-  }
-  
-  .content-container p {
-    font-size: 1.5rem;
-    line-height: 1.8;
-    margin-bottom: 30px;
-    text-shadow: 0 0 5px #00ffff;
-  }
-  
-  /* How to Play */
-  .how-to-play {
-    text-align: left;
-    margin: 20px auto 40px;
-    max-width: 600px;
-  }
-  
   .how-to-play h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: #00ffff;
-    text-shadow: 0 0 8px #00ffff;
-    text-align: center;
+    font-size: 1.6rem;
   }
-  
-  .how-to-play ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
   .how-to-play li {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-    text-shadow: 0 0 5px #00ffff;
+    font-size: 1rem;
   }
-  
-  /* Button */
-  button {
+  .btn-glow {
     font-size: 1.2rem;
-    padding: 20px 60px;
-    background-color: #00ffff;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 15px 45px;
   }
-  
-  button:hover {
-    background-color: #00dddd;
-    transform: scale(1.05);
+  .intro-text {
+    font-size: 1.3rem;
   }
-  
-  /* Footer */
-  footer {
-    background-color: #111;
-    color: #00ffff;
-    padding: 15px 0;
-    font-size: 0.9rem;
-    box-shadow: 0 -2px 10px #00ffff44;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-shadow: 0 0 5px #00ffff;
-  }
+}
+
   

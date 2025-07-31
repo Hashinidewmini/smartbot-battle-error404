@@ -1,80 +1,105 @@
 body {
     margin: 0;
     padding: 0;
-    background: radial-gradient(circle, #1f1f1f, #0d0d0d);
+    background: linear-gradient(135deg, #050505, #1a1a1a);
     color: #fff;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    animation: backgroundPulse 5s infinite alternate;
 }
 
 .winner-container {
     text-align: center;
-    animation: fadeIn 2s ease-in;
-}
-
-.celebrate-text {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    animation: pulse 1s infinite;
-}
-
-.winner-card {
     background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
+    border: 2px solid #0ff;
     border-radius: 20px;
-    border: 2px solid #00ffe5;
-    box-shadow: 0 0 15px #00ffe5;
-    display: inline-block;
-    animation: glow 2s ease-in-out infinite alternate;
+    padding: 40px 60px;
+    box-shadow: 0 0 30px #00ffe5;
+    animation: fadeIn 1.5s ease-out;
 }
 
-.winner-card img {
-    width: 200px;
+.headline {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: #0ff;
+    animation: pulse 2s infinite;
+}
+
+.winner-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.robot-img {
+    width: 180px;
     height: auto;
-    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 3px solid #00ffe5;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #00ffe5;
 }
 
-#winner-name {
+.winner-name {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: #ffd700;
+    text-shadow: 0 0 10px #ffd700;
+}
+
+.score-board {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.score-card {
+    background: rgba(0, 255, 229, 0.1);
+    padding: 20px 30px;
+    border: 1px solid #0ff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #00ffe5;
+    min-width: 150px;
+}
+
+.score-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.score-value {
     font-size: 2rem;
-    margin-top: 15px;
+    font-weight: bold;
+    color: #0ff;
+}
+
+.winner-label {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    color: #ffd700;
+    animation: pulse 1.5s infinite;
 }
 
 #restart-btn {
-    margin-top: 30px;
-    padding: 10px 25px;
-    font-size: 1.2rem;
-    background: #00ffe5;
+    background-color: #00ffe5;
     color: #000;
+    font-size: 1.2rem;
+    padding: 12px 28px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 0 10px #00ffe5;
-    transition: transform 0.2s;
+    transition: transform 0.2s ease-in-out, background-color 0.3s;
 }
 
 #restart-btn:hover {
     transform: scale(1.05);
-}
-
-
-@keyframes glow {
-    from {
-        box-shadow: 0 0 10px #00ffe5;
-    }
-    to {
-        box-shadow: 0 0 25px #00ffe5;
-    }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); color: #fff; }
-    50% { transform: scale(1.05); color: #00ffe5; }
-    100% { transform: scale(1); color: #fff; }
+    background-color: #0ff;
 }
 
 @keyframes fadeIn {
@@ -82,7 +107,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes backgroundPulse {
-    from { background-color: #0d0d0d; }
-    to { background-color: #1a1a1a; }
+@keyframes pulse {
+    0%, 100% { color: #ffd700; transform: scale(1); }
+    50% { color: #fff700; transform: scale(1.1); }
 }

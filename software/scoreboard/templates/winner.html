@@ -2,24 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Winner - SmartBot Battle</title>
+    <title>🏆 Winner - SmartBot Battle</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/winner.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="winner-container">
-        <h1 class="celebrate-text">🏆 Winner 🏆</h1>
+        <h1 class="headline">SmartBot Battle Results</h1>
 
-        <div class="winner-card">
-            
-            <img id="winner-img" src="{{ url_for('static', filename='images/robot.png') }}" alt="Winner Robot">  
-            <h2 id="winner-name"></h2>
-            <div class="score-box">
-                <p><strong>SmartBot:</strong> <span id="score-R1">0</span></p>
-                <p><strong>UserBot:</strong> <span id="score-R2">0</span></p>
+        <div class="winner-display">
+            <img id="winner-img" class="robot-img" src="{{ url_for('static', filename='images/robot.png') }}" alt="Winner Robot">
+            <h2 id="winner-name" class="winner-name">Loading...</h2>
+        </div>
+
+        <div class="score-board">
+            <div class="score-card">
+                <h3>🤖 SmartBot</h3>
+                <p class="score-value">
+                    <span id="score-R1">0</span>
+                    <span id="winner-R1" class="winner-label"></span>
+                </p>
+            </div>
+            <div class="score-card">
+                <h3>🕹️ UserBot</h3>
+                <p class="score-value">
+                    <span id="score-R2">0</span>
+                    <span id="winner-R2" class="winner-label"></span>
+                </p>
             </div>
         </div>
 
-        <button id="restart-btn">Restart Game</button>
+        <button id="restart-btn">🔁 Restart Game</button>
+
         <audio id="winner-sound" src="/static/sounds/winner.mp3" preload="auto"></audio>
     </div>
 
@@ -32,31 +46,28 @@
                 const R1 = data.scores.R1;
                 const R2 = data.scores.R2;
 
-                let winnerName = "";
-                let imagePath = "";
-
-                // Update scores
                 document.getElementById("score-R1").innerText = R1;
                 document.getElementById("score-R2").innerText = R2;
 
+                let winnerName = "";
+                let imagePath = "{{ url_for('static', filename='images/robot.png') }}";
+
                 if (R1 > R2) {
-                    winnerName = "SmartBot";
-                    imagePath = "software/scoreboard/static/images/robot.png";
+                    winnerName = "🏆 SmartBot Wins!";
+                    document.getElementById("winner-R1").innerText = "🏆";
                 } else if (R2 > R1) {
-                    winnerName = "UserBot";
-                    imagePath = "software/scoreboard/static/images/robot.png";
+                    winnerName = "🏆 UserBot Wins!";
+                    document.getElementById("winner-R2").innerText = "🏆";
                 } else {
                     winnerName = "🤝 It's a Draw!";
-                    imagePath =  "software/scoreboard/static/images/robot.png";
                 }
 
                 document.getElementById("winner-name").innerText = winnerName;
                 document.getElementById("winner-img").src = imagePath;
 
-                const sound = document.getElementById("winner-sound");
-                sound.play();
+                document.getElementById("winner-sound").play();
             } catch (error) {
-                console.error("Failed to fetch winner info:", error);
+                console.error("Failed to fetch scores:", error);
             }
 
             document.getElementById("restart-btn").onclick = () => {
@@ -66,3 +77,4 @@
     </script>
 </body>
 </html>
+

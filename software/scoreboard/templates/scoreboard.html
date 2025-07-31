@@ -12,6 +12,8 @@
     </style>
 </head>
 <body>
+    <audio id="countdown-sound" src="{{ url_for('static', filename='sounds/countdown.mp3') }}" preload="auto"></audio>
+
     <div class="container">
         <div class="scoreboard glass">
             <div class="bot" id="smartbot">
@@ -35,16 +37,18 @@
                 <div class="score glow" id="R2-score">0</div>
             </div>
         </div>
-
-        <audio id="countdown-sound" src="countdown.mp3" preload="auto"></audio>
     </div>
 
     <script>
         let fetchInterval;
-        let totalSeconds = 15;
+        let totalSeconds = 120;
+        let timerInterval;
+
         const timer = document.getElementById('match-timer');
         const last10 = document.getElementById('last10');
         const countdownSound = document.getElementById('countdown-sound');
+
+        countdownSound.volume = 1.0; // MUST be max 1.0
 
         async function fetchScores() {
             try {
@@ -71,9 +75,15 @@
             element.style.display = 'block';
             element.innerText = text;
             element.classList.remove('flash');
-            void element.offsetWidth; // Re-trigger animation
+            void element.offsetWidth;
             element.classList.add('flash');
-            countdownSound.play();
+
+            try {
+                countdownSound.currentTime = 0;
+                countdownSound.play().catch(err => console.warn("Audio blocked:", err));
+            } catch (err) {
+                console.warn("Countdown sound error:", err);
+            }
         }
 
         function startMatchTimer() {
@@ -91,7 +101,7 @@
                     flashText(last10, '🔥 GAME OVER! 🔥');
                     clearInterval(fetchInterval);
                     clearInterval(timerInterval);
-                    
+
                     const R1 = parseInt(document.getElementById('R1-score').innerText);
                     const R2 = parseInt(document.getElementById('R2-score').innerText);
                     const winner = R1 > R2 ? "SmartBot" : R2 > R1 ? "UserBot" : "Draw";
@@ -103,8 +113,9 @@
             }, 1000);
         }
 
-        let timerInterval;
-        window.onload = startMatchTimer;
+        document.addEventListener('DOMContentLoaded', startMatchTimer);
     </script>
 </body>
 </html>
+
+
